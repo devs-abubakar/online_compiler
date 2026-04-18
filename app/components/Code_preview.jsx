@@ -10,7 +10,10 @@ const Code_preview = () => {
     )
   };
   return (
-    <div className='w-5xl h-5xl'><iframe className='w-full h-full border-none bg-white' srcDoc={output} sandbox='allow-scripts'></iframe></div>
+    <div className='w-5xl h-5xl'>
+      <iframe className='w-full h-full border-none bg-white' srcDoc={output} sandbox='allow-scripts'>
+      </iframe>
+      </div>
   )
 }
 

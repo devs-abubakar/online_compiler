@@ -23,8 +23,7 @@ const Editor_UI = () => {
   
   return (
   <div>
-    <button className="bg-green-800 w-8 h-6 " onClick={handleRun}>Run</button>
-    <Dropdownselection/>
+
       <Editor height="90vh" width='50vw' defaultLanguage="javascript" defaultValue="// some comment" onMount={handleEditorMount}  />
     </div>
   )
