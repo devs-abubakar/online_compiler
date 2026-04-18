@@ -1,30 +1,16 @@
-import {  Editor } from '@monaco-editor/react';
-import { useRef } from 'react'
+import React from 'react'
 import useEditorStore from '../store/useEditorStore'
-import { Dropdownselection } from '../hero_ui/Dropdown';
+import HtmlEditor from './editors/HtmlEditor'
+import CssEditor from './editors/CssEditor'
+import JsEditor from './editors/JsEditor'
+
 const Editor_UI = () => {
-  const editorRef= useRef(null) //to manipulate the editor
-  const setOutput = useEditorStore((state)=> state.setOutput)
-
-  const handleEditorMount =(editor)=>{
-    editorRef.current=editor
-  }
-  const handleRun=()=>{
-  if(editorRef.current){
-    const code = editorRef.current.getValue()
-    const htmlDoc = `<html>
-          <body>
-            <script>${code}<\/script>
-          </body>
-        </html>`
-    setOutput(htmlDoc)
-  }}
-
-  
+  const activeTab = useEditorStore((s)=>s.activeTab)  
   return (
-  <div>
-
-      <Editor height="90vh" width='50vw' defaultLanguage="javascript" defaultValue="// some comment" onMount={handleEditorMount}  />
+    <div>
+      {activeTab === "html" && <HtmlEditor/>}
+      {activeTab === "css" && <CssEditor/>}
+      {activeTab === "js" && <JsEditor/>}
     </div>
   )
 }

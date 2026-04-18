@@ -1,8 +1,19 @@
-import React from 'react'
+import { Editor } from '@monaco-editor/react'
+import {useRef,React} from 'react'
+import useEditorStore from '@/app/store/useEditorStore'
 
 const CssEditor = () => {
+      const editorRef=useRef(null)
+      const cssCode =useEditorStore((s)=>s.cssCode) 
+      const setCssCode =useEditorStore((s)=>s.setCssCode) 
+      const handleDidMount = (editor) => {
+          editorRef.current = editor
+      }
+
   return (
-    <div>CssEditor</div>
+    <div>
+      <Editor value={cssCode} language='css' onChange={(value)=>setCssCode(value || '')} width={'50vw'} height={'100vh'} onMount={handleDidMount} />
+    </div>
   )
 }
 

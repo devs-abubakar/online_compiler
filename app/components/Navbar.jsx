@@ -6,6 +6,7 @@ const Navbar = () => {
     const runCode = useEditorStore((s)=> s.runCode)
     const HandleRun = () =>{
         runCode()
+        console.log("ran")
     }
 
   return (

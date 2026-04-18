@@ -24,6 +24,9 @@ const useEditorStore =create((set)=>({
         </html>
         `,
     })),
+    activeTab: "html",
+    setActiveTab : (tab)=>set({activeTab : tab})
+
     
 }))
 export default useEditorStore
