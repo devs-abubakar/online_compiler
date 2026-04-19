@@ -10,6 +10,9 @@ const CodePreview = () => {
   const manual = useEditorStore((s) => s.manual)
 
 useEffect(() => {
+  if (manual){
+    return
+  }
   const timer = setTimeout(() => {
     runCode()
   }, 300)

@@ -4,11 +4,11 @@ import useEditorStore from '../store/useEditorStore'
 
 const Navbar = () => {
   const runCode = useEditorStore((s) => s.runCode)
-  const setManual = useEditorStore((s)=> s.setManual)
-  const manual = useEditorStore((s)=> s.manual)
+  const toggleManual = useEditorStore((s)=> s.toggleManual)
+
 
   const handleToggle = ()=>{
-    setManual(!manual)
+    toggleManual()
   }
 
   const handleRun = () => {

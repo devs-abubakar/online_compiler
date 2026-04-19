@@ -12,6 +12,7 @@ const useEditorStore =create((set)=>({
     setCssCode :(value)=>set({cssCode: value}),
     setJsCode :(value)=>set({jsCode: value}),
 
+    toggleManual : ()=>set((state)=>({manual : !state.manual})),
     runCode : () => set((state)=>({
         srcDoc:`
         <!DOCTYPE html>
