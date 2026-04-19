@@ -10,9 +10,10 @@ const JsEditor = () => {
           editorRef.current = editor
       }
 
+      
   return (
     <div>
-      <Editor value={jsCode} language='javascript' onChange={(value)=>setJsCode(value || '')} width={'50vw'} height={'100vh'} onMount={handleDidMount} />
+      <Editor value={jsCode} language='javascript' onChange={(value)=>setJsCode(value || '')} width={'50vw'} height={'100%'} onMount={handleDidMount} />
     </div>
   )
 }

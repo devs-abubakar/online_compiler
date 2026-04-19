@@ -5,14 +5,13 @@ import CssEditor from './editors/CssEditor'
 import JsEditor from './editors/JsEditor'
 
 const Editor_UI = () => {
-  const activeTab = useEditorStore((s)=>s.activeTab)  
-  return (
-    <div>
-      {activeTab === "html" && <HtmlEditor/>}
-      {activeTab === "css" && <CssEditor/>}
-      {activeTab === "js" && <JsEditor/>}
-    </div>
+  const activeTab = useEditorStore((s) => s.activeTab)
+
+  return (<>
+{activeTab === "html" && <HtmlEditor />}
+{activeTab === "css" && <CssEditor />}
+{activeTab === "js" && <JsEditor />}
+  </>
   )
 }
-
 export default Editor_UI

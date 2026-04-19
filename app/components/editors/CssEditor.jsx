@@ -12,7 +12,7 @@ const CssEditor = () => {
 
   return (
     <div>
-      <Editor value={cssCode} language='css' onChange={(value)=>setCssCode(value || '')} width={'50vw'} height={'100vh'} onMount={handleDidMount} />
+      <Editor value={cssCode} language='css' onChange={(value)=>setCssCode(value || '')} width={'50vw'} height={'100%'} onMount={handleDidMount} />
     </div>
   )
 }

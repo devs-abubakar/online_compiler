@@ -5,7 +5,9 @@ const useEditorStore =create((set)=>({
     cssCode : ``,
     jsCode : ``,
     srcDoc : ``,
-    
+    manual : true,
+
+    setManual : (value)=>set({manual : value}),
     setHtmlCode :(value)=>set({htmlCode: value}),
     setCssCode :(value)=>set({cssCode: value}),
     setJsCode :(value)=>set({jsCode: value}),

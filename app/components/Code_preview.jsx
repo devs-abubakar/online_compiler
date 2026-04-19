@@ -1,20 +1,35 @@
-import React from 'react'
-import useEditorStore from '../store/useEditorStore'
+import { useEffect } from "react"
+import useEditorStore from "../store/useEditorStore"
 
-const Code_preview = () => {
-  const output = useEditorStore((state)=> state.output)
+const CodePreview = () => {
+  const runCode = useEditorStore((s) => s.runCode)
+  const htmlCode = useEditorStore((s) => s.htmlCode)
+  const cssCode = useEditorStore((s) => s.cssCode)
+  const jsCode = useEditorStore((s) => s.jsCode)
+  const srcDoc = useEditorStore((s) => s.srcDoc)
+  const manual = useEditorStore((s) => s.manual)
 
-  if (!output){
-    return (
-      <div> try adding some code </div>
-    )
-  };
+useEffect(() => {
+  const timer = setTimeout(() => {
+    runCode()
+  }, 300)
+
+  return () => clearTimeout(timer)
+}, [htmlCode, cssCode, jsCode])
+
+  if (!srcDoc) {
+    return <div>try adding some code</div>
+  }
+
   return (
-    <div className='w-5xl h-5xl'>
-      <iframe className='w-full h-full border-none bg-white' srcDoc={output} sandbox='allow-scripts'>
-      </iframe>
-      </div>
+    <div className="w-full h-full">
+      <iframe
+        className="w-full h-full border-none bg-white"
+        srcDoc={srcDoc}
+        sandbox="allow-scripts"
+      />
+    </div>
   )
 }
 
-export default Code_preview
+export default CodePreview

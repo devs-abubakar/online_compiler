@@ -1,18 +1,27 @@
-import React from 'react'
-import Editor_UI from './Editor_UI';
-import Code_preview from './Code_preview';
-import Navbar from './Navbar';
-import Tabs from './Tabs';
+import React from "react"
+import Navbar from "./Navbar"
+import Tabs from "./Tabs"
+import SplitLayout from "./SplitLayout"
 
 const Screen = () => {
   return (
-    <div className='w-full h-full flex flex-row'>
-      <Navbar className='absolute top-0 right-0 w-full h-12'/>
-      <div > 
-        <Tabs />
-        <Editor_UI/>
+    <div className="w-full h-screen flex flex-col">
+      
+      {/* Top Navbar */}
+      <div className="h-12 w-full">
+        <Navbar />
       </div>
-      <Code_preview/>
+
+      {/* Tabs */}
+      <div className="h-10 w-full border-b border-gray-700">
+        <Tabs />
+      </div>
+
+      {/* Main Area */}
+      <div className="flex-1 w-full overflow-hidden">
+        <SplitLayout />
+      </div>
+
     </div>
   )
 }

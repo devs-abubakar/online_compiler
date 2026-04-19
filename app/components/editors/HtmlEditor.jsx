@@ -12,7 +12,7 @@ const HtmlEditor = () => {
     }
   return (
     <div>
-        <Editor value={htmlCode} language='html' onChange={(value)=>setHtmlCode(value || '')} width={'50vw'} height={'100vh'} onMount={handleDidMount} />
+        <Editor value={htmlCode} language='html' onChange={(value)=>setHtmlCode(value || '')} width={'50vw'} height={'100%'} onMount={handleDidMount} />
     </div>
   )
 }
