@@ -2,10 +2,10 @@ import React from 'react'
 import useEditorStore from '../store/useEditorStore'
 
 const Tabs = () => {
-  const activeTab = useEditorStore((s) => s.activeTab)
-  const setActiveTab = useEditorStore((s) => s.setActiveTab)
+  const activeFile = useEditorStore((s) => s.activeFile)
+  const setActiveFile = useEditorStore((s) => s.setActiveFile)
 
-  const tabs = [
+  const files = [
     { id: 'html', label: 'index.html' },
     { id: 'css', label: 'style.css' },
     { id: 'js', label: 'script.js' },
@@ -13,13 +13,14 @@ const Tabs = () => {
 
   return (
     <div className="w-full h-12 bg-[#1e1e1e] border-b border-gray-700 flex items-end px-2 gap-1 overflow-x-auto">
-      {tabs.map((tab) => {
-        const isActive = activeTab === tab.id
+      {files.map((file) => {
+        const isActive = activeFile === file.id
 
         return (
           <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            key={file.id}
+            onClick={() => {setActiveFile(file.label)
+              console.log(file.label)}}
             className={`
               px-4 h-10 text-sm rounded-t-md transition-all duration-200
               border border-b-0
@@ -30,7 +31,7 @@ const Tabs = () => {
               }
             `}
           >
-            {tab.label}
+            {file.label}
           </button>
         )
       })}

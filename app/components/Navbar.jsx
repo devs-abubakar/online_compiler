@@ -5,10 +5,17 @@ import useEditorStore from '../store/useEditorStore'
 const Navbar = () => {
   const runCode = useEditorStore((s) => s.runCode)
   const toggleManual = useEditorStore((s)=> s.toggleManual)
+  const manual = useEditorStore((s)=> s.manual)
+
+
 
 
   const handleToggle = ()=>{
+    console.log(manual)
     toggleManual()
+    console.log('toggled')
+
+
   }
 
   const handleRun = () => {

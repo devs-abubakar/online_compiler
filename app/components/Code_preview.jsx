@@ -3,14 +3,16 @@ import useEditorStore from "../store/useEditorStore"
 
 const CodePreview = () => {
   const runCode = useEditorStore((s) => s.runCode)
-  const htmlCode = useEditorStore((s) => s.htmlCode)
-  const cssCode = useEditorStore((s) => s.cssCode)
-  const jsCode = useEditorStore((s) => s.jsCode)
+  const htmlCode = useEditorStore((s) => s.files["vanilla"]["index.html"].code)
+  const cssCode = useEditorStore((s) => s.files["vanilla"]["style.css"].code)
+  const jsCode = useEditorStore((s) => s.files["vanilla"]["script.js"].code)
   const srcDoc = useEditorStore((s) => s.srcDoc)
   const manual = useEditorStore((s) => s.manual)
 
+  console.log(htmlCode,cssCode,jsCode)
 useEffect(() => {
   if (manual){
+    console.log(manual)
     return
   }
   const timer = setTimeout(() => {
@@ -18,7 +20,7 @@ useEffect(() => {
   }, 300)
 
   return () => clearTimeout(timer)
-}, [htmlCode, cssCode, jsCode])
+}, [htmlCode, cssCode, jsCode,srcDoc])
 
   if (!srcDoc) {
     return <div>try adding some code</div>
