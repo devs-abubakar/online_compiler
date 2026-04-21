@@ -17,23 +17,7 @@ const sandpackFiles = useMemo(() => {
       ])
     );
   }, [codeTracker]);
-  const testFiles = {
-  "/index.js": `
-import React from "react";
-import { createRoot } from "react-dom/client";
 
-const App = () => (
-  <div style={{ padding: '20px', background: '#eee' }}>
-    <h1>System Check: Operational</h1>
-    <p>React Version: hello </p>
-  </div>
-);
-
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(<App />);
-`
-};
 
   return (
 <SandpackProvider

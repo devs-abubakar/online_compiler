@@ -9,7 +9,7 @@ const boilerPlates = { "vanilla":{
     "App.js" :{ code : `export default function App() {
   return (
     <div style={{ padding: 30 }}>
-      <h1>Hello React 🚀</h1>
+      <h1>Hello React </h1>
       <button onClick={() => alert("React works!")}>
         Click Me
       </button>

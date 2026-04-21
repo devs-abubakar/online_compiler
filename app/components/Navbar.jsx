@@ -22,15 +22,15 @@ const Navbar = () => {
     }else if (activeProject === 'react'){
       setActiveProject('vanilla')
       setActiveFile('index.html')
-      console.log(activeFile)
+
     }
   }
 
 
   const handleToggle = ()=>{
-    console.log(manual)
+
     toggleManual()
-    console.log('toggled')
+
 
 
   }
