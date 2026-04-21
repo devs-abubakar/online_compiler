@@ -8,6 +8,7 @@ const CodeEditor = () => {
     const activeFile = useEditorStore((s)=>s.activeFile)
     const files = useEditorStore((s)=>s.files)
     const updateFile = useEditorStore((s)=>s.updateFile)
+    console.log(files[activeProject][activeFile])
     const handleDidMount = (editor) => {
         editorRef.current = editor 
     }

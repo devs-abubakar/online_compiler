@@ -1,17 +1,53 @@
 import { create } from "zustand";
 
+const boilerPlates = { "vanilla":{
+    "index.html" : {code : `<!DOCTYPE html>\n<html>\n<body>\n  <h1 id="app">Hello Vanilla</h1>\n</body>\n</html>`},
+    "style.css" : {code : `body { font-family: sans-serif; }`},
+    "script.js" : {code : `console.log("Vanilla works!");`},
+  },
+  "react" :{
+    "App.js" :{ code : `export default function App() {
+  return (
+    <div style={{ padding: 30 }}>
+      <h1>Hello React 🚀</h1>
+      <button onClick={() => alert("React works!")}>
+        Click Me
+      </button>
+    </div>
+  );
+}` },
+    "index.js" :{ code : `import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);` },
+    "style.css" :{ code : `body { margin: 0; }` },
+  }
+ };
+
 const useEditorStore = create((set, get) => ({
+  
+  boilerPlates,
+  
   srcDoc: "",
   manual: true,
+  
 
   files: {"vanilla" : {
-    "index.html": { code: "", language: "html" },
+    "index.html": { code: `${boilerPlates['vanilla']['index.html'].code}`, language: "html" },
     "style.css": { code: "", language: "css" },
     "script.js": { code: "", language: "javascript" },
   },
-  "React":{
-    "App.jsx" :{code:"",language : "javascript"},
-    "index.js" :{code:"",language : "javascript"},
+  "react":{
+    "App.js" :{code:`${boilerPlates['react']['App.js'].code}`,language : "javascript"},
+    "index.js" :{code:`${boilerPlates['react']['index.js'].code}`,language : "javascript"},
     "style.css" :{code:"",language : "css"},
   }
 },
@@ -66,7 +102,7 @@ const useEditorStore = create((set, get) => ({
 
   if (activeProject === "react") {
     // later: Sandpack runtime handles this
-    console.log("React mode - handled by Sandpack");
+    
   }
 },
   

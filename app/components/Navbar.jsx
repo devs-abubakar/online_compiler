@@ -6,8 +6,25 @@ const Navbar = () => {
   const runCode = useEditorStore((s) => s.runCode)
   const toggleManual = useEditorStore((s)=> s.toggleManual)
   const manual = useEditorStore((s)=> s.manual)
+  const activeProject = useEditorStore((s)=>s.activeProject)
+  const activeFile = useEditorStore((s)=>s.activeFile)
+  const setActiveProject = useEditorStore((s)=>s.setActiveProject)
+  const setActiveFile = useEditorStore((s)=>s.setActiveFile)
 
 
+
+  const handleToggleProject = ()=>{
+    if (activeProject==='vanilla'){
+      setActiveProject('react')
+      setActiveFile('App.js')
+      
+      console.log(activeFile)
+    }else if (activeProject === 'react'){
+      setActiveProject('vanilla')
+      setActiveFile('index.html')
+      console.log(activeFile)
+    }
+  }
 
 
   const handleToggle = ()=>{
@@ -42,6 +59,12 @@ const Navbar = () => {
           className="px-4 py-1.5 rounded-md bg-green-600 hover:bg-green-500 text-white text-sm transition"
         >
           Auto-update
+        </button>
+        <button
+          onClick={handleToggleProject}
+          className="px-4 py-1.5 rounded-md bg-green-600 hover:bg-green-500 text-white text-sm transition"
+        >
+          {activeProject}
         </button>
       </div>
 
