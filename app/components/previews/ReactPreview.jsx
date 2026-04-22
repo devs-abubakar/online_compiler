@@ -1,33 +1,32 @@
-"use client"
+"use client";
+
 import { SandpackProvider, SandpackPreview } from "@codesandbox/sandpack-react";
 import useEditorStore from "@/app/store/useEditorStore";
 import { useMemo } from "react";
 
 const ReactPreview = () => {
   const files = useEditorStore((s) => s.files.react);
-  console.log(files)
+  const activeProject = useEditorStore ((s)=>s.activeProject)
+  const version = useMemo(() => Date.now(), [files]);
 
-  const codeTracker = JSON.stringify(files);
-
-const sandpackFiles = useMemo(() => {
+  const sandpackFiles = useMemo(() => {
     return Object.fromEntries(
-      Object.entries(files).map(([fileName, file]) => [
-        `/${fileName}`,
-        file.code || ""
+      Object.entries(files || {}).map(([name, file]) => [
+        `/${name}`,
+        { code: file.code || "" }
       ])
     );
-  }, [codeTracker]);
+  }, [files]);
 
 
   return (
-<SandpackProvider
-      // REMOVE the 'key' prop if you want smooth updates! 
-      // If the 'key' stays, the whole preview flashes/reloads on every keystroke.
+    <SandpackProvider
       template="react"
+      key={`${activeProject}-${version}`}
       files={sandpackFiles}
       options={{
-        recompileMode: "immediate",
-        recompileDelay: 500, // Wait 500ms after typing to refresh
+        recompileMode: "delayed",
+        recompileDelay: 300,
       }}
     >
       <SandpackPreview />

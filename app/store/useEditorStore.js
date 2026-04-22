@@ -1,9 +1,46 @@
 import { create } from "zustand";
 
+
+const languages = [
+    { id: 'vanilla', label: 'Vanilla' },
+    { id: 'react', label: 'React' },
+    { id: 'vue', label: 'Vue' },
+    ];
+
 const boilerPlates = { "vanilla":{
     "index.html" : {code : `<!DOCTYPE html>\n<html>\n<body>\n  <h1 id="app">Hello Vanilla</h1>\n</body>\n</html>`},
     "style.css" : {code : `body { font-family: sans-serif; }`},
     "script.js" : {code : `console.log("Vanilla works!");`},
+  },
+  "vue" :{
+    "App.vue":{
+    code: `
+<template>
+  <h1>Hello Vue</h1>
+</template>
+
+<script>
+export default {}
+</script>
+`,
+    language: "html"
+  },
+  "main.js":{
+    code: `
+import { createApp } from "vue"
+import App from "./App.vue"
+
+createApp(App).mount("#app")
+`,
+    language: "javascript"
+  },
+  "style.css" : {
+    code : `
+h1 {
+  color: green;
+}
+`
+  }
   },
   "react" :{
     "App.js" :{ code : `export default function App() {
@@ -34,22 +71,17 @@ root.render(
 
 const useEditorStore = create((set, get) => ({
   
+  languages,
   boilerPlates,
   
   srcDoc: "",
   manual: true,
   
 
-  files: {"vanilla" : {
-    "index.html": { code: `${boilerPlates['vanilla']['index.html'].code}`, language: "html" },
-    "style.css": { code: "", language: "css" },
-    "script.js": { code: "", language: "javascript" },
-  },
-  "react":{
-    "App.js" :{code:`${boilerPlates['react']['App.js'].code}`,language : "javascript"},
-    "index.js" :{code:`${boilerPlates['react']['index.js'].code}`,language : "javascript"},
-    "style.css" :{code:"",language : "css"},
-  }
+  files: {
+  vanilla: structuredClone(boilerPlates.vanilla),
+  react: structuredClone(boilerPlates.react),
+  vue: structuredClone(boilerPlates.vue),
 },
     activeProject:"vanilla",
     activeFile: "index.html",
@@ -100,10 +132,6 @@ const useEditorStore = create((set, get) => ({
     set({ srcDoc });
   }
 
-  if (activeProject === "react") {
-    // later: Sandpack runtime handles this
-    
-  }
 },
   
 }));
