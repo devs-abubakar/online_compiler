@@ -36,7 +36,13 @@ const Navbar = () => {
   }
 
   const handleRun = () => {
-    runCode()
+    if (activeProject ==="vanilla"){
+      runCode()
+    }else if (activeProject === "react"){
+
+    }else if (activeProject === "vue"){
+      
+    }
   }
 
   return (

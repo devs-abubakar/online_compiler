@@ -1,64 +1,49 @@
-import React,{useMemo }from 'react'
-import { SandpackPreview,SandpackProvider } from '@codesandbox/sandpack-react'
+import React, { useMemo, useState, useEffect } from 'react';
+import { SandpackProvider, SandpackPreview } from '@codesandbox/sandpack-react';
 import useEditorStore from '@/app/store/useEditorStore';
 
 const VuePreview = () => {
-      const files = useEditorStore((s) => s.files.vue);
-    const activeProject = useEditorStore ((s)=>s.activeProject)
-    // const version = JSON.stringify(files);
-  const sandpackFiles = useMemo(() => {
-    console.log(files)
-    return Object.fromEntries(
-      Object.entries(files || {}).map(([name, file]) => [
-        `/${name}`,
-        { code: file.code || "" }
-      ])
-    );
+  const files = useEditorStore((s) => s.files.vue);
+  const activeProject = useEditorStore((s) => s.activeProject);
+  
+  const [version, setVersion] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVersion(v => v + 1), 600);
+    return () => clearTimeout(timer);
   }, [files]);
+
+  //Explicitly defining the files and their structure
+  const sandpackFiles = useMemo(() => ({
+    // Using the /src/ prefix as Vue templates are often Vite-based
+    "/src/App.vue": files["App.vue"].code,
+    "/src/main.js": files["main.js"].code,
+    "/src/style.css": files["style.css"].code,
+    // Adding an explicit index.html to force the module type in the script tag
+    "/index.html": `
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <div id="app"></div>
+          <script type="module" src="/src/main.js"></script>
+        </body>
+      </html>
+    `
+  }), [files]);
+
   return (
-        <SandpackProvider
-  template="vue"
-  key={Date.now()}
-  entry="/main.js"
-  files={{
-    "/App.vue": {
-      code: `<template>
-  <h1>Hello Vue 🚀</h1>
-</template>
+    <SandpackProvider
+      template="vue"
+      key={`${activeProject}-${version}`}
+      files={sandpackFiles}
+      customSetup={{
+        entry: "/src/main.js",
+        dependencies: { "vue": "^3.2.0" }
+      }}
+    >
+      <SandpackPreview />
+    </SandpackProvider>
+  );
+};
 
-<script>
-export default {};
-</script>
-
-<style>
-h1 {
-  color: green;
-}
-</style>`
-    },
-
-    "/main.js": {
-      code: `import { createApp } from "vue";
-import App from "./App.vue";
-
-createApp(App).mount("#app");`
-    },
-
-    "/style.css": {
-      code: `body {
-  margin: 0;
-  font-family: sans-serif;
-}`
-    }
-  }}
-  options={{
-    recompileMode: "immediate",
-    recompileDelay: 500
-  }}
->
-  <SandpackPreview />
-</SandpackProvider>
-  )
-}
-
-export default VuePreview
+export default VuePreview;
