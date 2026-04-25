@@ -1,7 +1,8 @@
 
 import { runPythonCode } from "./python"
 import { runNodeCode } from "./node"
-export async function RunCode(code,language){
+export async function RunCode(language,code){
+    console.log(`language : ${language}=== code :${code}`)
     switch(language){
         case "python" : {
             return await runPythonCode(code)

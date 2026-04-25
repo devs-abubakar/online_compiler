@@ -2,14 +2,12 @@ import { RunCode } from "@/app/lib/executor/index"
 import { NextResponse } from "next/server"
 
 export async function POST(req){
-    if(!code){
-        return
-    }
+    const {language , code } = await req.json()
     try{
-        const {language , code } = await req.json()
         console.log(language,code)
-        const output = await RunCode(code,language)
-        return NextResponse.json({message : "success"},{status:200})
+        const output = await RunCode(language,code)
+        console.log(output)
+        return NextResponse.json({ output }, { status: 200 });
     }catch (error){
         return NextResponse.json({message:`error occured ${error.message}`},{status:500})
     }

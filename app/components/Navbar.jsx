@@ -44,7 +44,7 @@ const Navbar = () => {
   },
   body: JSON.stringify({
     language: 'python',
-    code: 'print("hello world")'
+    code: "print('hello world')"
   })
 }).then(response => response.json()).then(data => console.log(data))
 
