@@ -36,6 +36,19 @@ const Navbar = () => {
   }
 
   const handleRun = () => {
+    
+    fetch('/api/run', {
+        method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    language: 'python',
+    code: 'print("hello world")'
+  })
+}).then(response => response.json()).then(data => console.log(data))
+
+
     if (activeProject ==="vanilla"){
       runCode()
     }else if (activeProject === "react"){
